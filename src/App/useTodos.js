@@ -1,15 +1,16 @@
 import React from 'react';
 import { useLocalStorage } from './useLocalStorage';
 
-const TodoContext = React.createContext();
 
-function TodoProvider(props) {
+
+function useTodos() { //Custom hook
   const {
     item: todos,
     saveItem: saveTodos,
     loading,
     error,
-  } = useLocalStorage('TODOS_V1', []);
+  } = useLocalStorage('TODOS_V1', []);   //Custom HOOK
+
   const [searchValue, setSearchValue] = React.useState('');
   const [openModal, setOpenModal] = React.useState(false);
 
@@ -51,8 +52,9 @@ function TodoProvider(props) {
     saveTodos(newTodos);
   };
   
-  return (
-    <TodoContext.Provider value={{
+
+
+return{   //Se devuelven las propiedades como un objeto.
       loading,
       error,
       totalTodos,
@@ -65,10 +67,7 @@ function TodoProvider(props) {
       deleteTodo,
       openModal,
       setOpenModal,
-    }}>
-      {props.children}
-    </TodoContext.Provider>
-  );
+    }
 }
 
-export { TodoContext, TodoProvider };
+export {useTodos};

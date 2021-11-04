@@ -1,108 +1,95 @@
 import React from 'react';
-import { TodoProvider } from '../TodoContext';
-//import { TodoProvider } from '../TodoContext';
-//import { AppUI } from './AppUI';
-
-function App(){ //Componente Padre, donde se renderiza la Aplicacion
-
-  const [state,setState]=React.useState('Estado compartido');
-  //El estado se comparte en el componente padre
-
-    return (
-
-      
-                   <React.Fragment>
-
-                       <TodoHeader>
-                           <TodoCounter state={state}/>          
-                           <TodoSearch state={state}/>
-                       </TodoHeader>    
-
-                       <TodoList>                        
-                           <TodoItem state={state}/>
-                       </TodoList>  
-
-                   </React.Fragment>
-
-         //Composicion de componentes          
-       
-    )
-}
 
 
+import { Todoheader } from '../Todoheader';
+import { useTodos } from './useTodos';
+import { TodoCounter } from '../TodoCounter';
+import { TodoSearch } from '../TodoSearch';
+import { TodoList } from '../TodoList';
+import { TodoItem } from '../TodoItem';
+import { TodosError } from '../TodosError';
+import { TodosLoading } from '../TodosLoading';
+import { EmptyTodos } from '../EmptyTodos';
+import { TodoForm } from '../TodoForm';
+import { CreateTodoButton } from '../CreateTodoButton';
+import { Modal } from '../Modal';
 
-function TodoHeader({children}){
-
-    return (
-        <header>
-            {children} 
-        </header>  
-    )
-}
-
-function TodoList({children}){
-  return(
-       <section>
-         {children}
-       </section>
-
-  );  
-}
-
-
-function TodoCounter(props){
-  
-  return(
-
-    <p>TodoCounter: {props.state} </p>
-
-  );
-}
-
-function TodoSearch(props){
-
-   return(
-
-    <p>TodoSearch : {props.state}</p>
-   
-    );
-}
-
-
-function TodoItem(props){
-
-  return(
-
-    <p>TodoItem {props.state}</p>
-
-  );
-
-}
+//Importacion de componentes
 
 
 
 
 
+function App() {//Componente Padre, donde se renderiza la Aplicacion
+
+  const {
+    error,
+    loading,
+    searchedTodos,
+    completeTodo,
+    deleteTodo,
+    openModal,
+    setOpenModal,
+    totalTodos, 
+    completedTodos,
+    searchValue, 
+    setSearchValue,
+    addTodo,
+
+  } = useTodos(); //Llamada al custom hook
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-/*function App() {
   return (
-    <TodoProvider>
-      <AppUI />
-    </TodoProvider>
+    <React.Fragment>
+
+      <Todoheader>
+          <TodoCounter>
+              totalTodos={totalTodos}
+              completedTodos={completedTodos}
+          </TodoCounter> 
+
+          <TodoSearch
+              searchValue={searchValue}
+              setSearchValue={setSearchValue}
+          />
+      </Todoheader>
+      
+      
+
+      <TodoList>
+        {error && <TodosError />}
+        {loading && <TodosLoading />}
+        {(!loading && !searchedTodos.length) && <EmptyTodos />}
+        
+        {searchedTodos.map(todo => (
+          <TodoItem
+            key={todo.text}
+            text={todo.text}
+            completed={todo.completed}
+            onComplete={() => completeTodo(todo.text)}
+            onDelete={() => deleteTodo(todo.text)}
+          />
+        ))}
+      </TodoList>
+
+      {!!openModal && (
+        <Modal>
+          <TodoForm
+
+             addTodo={addTodo}
+             setOpenModal={setOpenModal}
+          
+          />  
+        </Modal>
+      )}
+
+      <CreateTodoButton
+        setOpenModal={setOpenModal}
+      />
+    </React.Fragment>
   );
-}*/
+}
+
+
 
 export default App;
