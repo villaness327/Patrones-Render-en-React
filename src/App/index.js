@@ -17,9 +17,6 @@ import { Modal } from '../Modal';
 //Importacion de componentes
 
 
-
-
-
 function App() {//Componente Padre, donde se renderiza la Aplicacion
 
   const {
@@ -36,7 +33,7 @@ function App() {//Componente Padre, donde se renderiza la Aplicacion
     setSearchValue,
     addTodo,
 
-  } = useTodos(); //Llamada al custom hook
+  } = useTodos(); //Llamada al custom hook "useTodos"
 
 
   return (
@@ -52,25 +49,29 @@ function App() {//Componente Padre, donde se renderiza la Aplicacion
               searchValue={searchValue}
               setSearchValue={setSearchValue}
           />
-      </Todoheader>
-      
-      
+      </Todoheader>   
 
-      <TodoList>
-        {error && <TodosError />}
-        {loading && <TodosLoading />}
-        {(!loading && !searchedTodos.length) && <EmptyTodos />}
-        
-        {searchedTodos.map(todo => (
-          <TodoItem
-            key={todo.text}
-            text={todo.text}
-            completed={todo.completed}
-            onComplete={() => completeTodo(todo.text)}
-            onDelete={() => deleteTodo(todo.text)}
-          />
-        ))}
-      </TodoList>
+     <TodoList
+
+       error={error}
+       loading={loading}
+       searchedTodos={searchedTodos}
+
+  
+        onError={()=><TodosError />}
+        onLoading={()=><TodosLoading />}
+        onEmptyTodos={()=><EmptyTodos />}
+
+        render={todo => (
+            <TodoItem
+              key={todo.text}
+              text={todo.text}
+              completed={todo.completed}
+              onComplete={() => completeTodo(todo.text)}
+              onDelete={() => deleteTodo(todo.text)}
+            />
+          )}
+        />  
 
       {!!openModal && (
         <Modal>
