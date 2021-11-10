@@ -2,6 +2,7 @@ import React from 'react';
 import './TodoSearch.css';
 
 function TodoSearch({ searchValue, setSearchValue }) {
+  
   const onSearchValueChange = (event) => {
     console.log(event.target.value);
     setSearchValue(event.target.value);
@@ -11,7 +12,7 @@ function TodoSearch({ searchValue, setSearchValue }) {
     <input
       className="TodoSearch"
       placeholder="Cebolla"
-      value={searchValue}
+      value={searchValue}// Aqui se conecta al estado
       onChange={onSearchValueChange}    
     />
   );

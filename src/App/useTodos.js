@@ -20,12 +20,12 @@ function useTodos() { //Custom hook
   let searchedTodos = [];
 
   if (!searchValue.length >= 1) {
-    searchedTodos = todos;
+    searchedTodos = todos; // todos los todos que esten almacenados, no se a buscado nada
   } else {
     searchedTodos = todos.filter(todo => {
-      const todoText = todo.text.toLowerCase();
-      const searchText = searchValue.toLowerCase();
-      return todoText.includes(searchText);
+      const todoText = todo.text.toLowerCase(); //Array de todos a minuscula
+      const searchText = searchValue.toLowerCase();//Lo que se buscó a minuscula
+      return todoText.includes(searchText);//Retorna la coincidencia de busqueda
     });
   }
 

@@ -10,6 +10,7 @@ import { TodoItem } from '../TodoItem';
 import { TodosError } from '../TodosError';
 import { TodosLoading } from '../TodosLoading';
 import { EmptyTodos } from '../EmptyTodos';
+import { EmptySearchResults } from '../EmptySearchResults';
 import { TodoForm } from '../TodoForm';
 import { CreateTodoButton } from '../CreateTodoButton';
 import { Modal } from '../Modal';
@@ -56,12 +57,17 @@ function App() {//Componente Padre, donde se renderiza la Aplicacion
        error={error}
        loading={loading}
        searchedTodos={searchedTodos}
+       totalTodos={totalTodos}
+     
 
   
         onError={()=><TodosError />}
         onLoading={()=><TodosLoading />}
         onEmptyTodos={()=><EmptyTodos />}
+        onEmptySearchResults={()=><EmptySearchResults searchValue={searchValue}/>}
 
+
+        /* Render Props */
         render={todo => (
             <TodoItem
               key={todo.text}
@@ -71,6 +77,9 @@ function App() {//Componente Padre, donde se renderiza la Aplicacion
               onDelete={() => deleteTodo(todo.text)}
             />
           )}
+
+
+        
         />  
 
       {!!openModal && (

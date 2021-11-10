@@ -1,4 +1,5 @@
 import React from 'react';
+import { render } from 'react-dom';
 import './TodoList.css'
 
 function TodoList(props) {
@@ -7,7 +8,8 @@ function TodoList(props) {
      
      {props.error && props.onError()}
      {props.loading && props.onLoading()}
-     {(!props.loading && !props.searchedTodos.length) && props.onEmptyTodos()}
+     {(!props.loading && !props.totalTodos) && props.onEmptyTodos()}
+     {(!!props.totalTodos && !props.searchedTodos.length) && props.onEmptySearchResults()}
 
       <ul>
       {props.searchedTodos.map(todo=>props.render(todo))}
