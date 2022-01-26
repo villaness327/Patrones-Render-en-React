@@ -1,7 +1,7 @@
 import React from 'react';
 import './TodoSearch.css';
 
-function TodoSearch({ searchValue, setSearchValue }) {
+function TodoSearch({ searchValue, setSearchValue,loading }) {
   
   const onSearchValueChange = (event) => {
     console.log(event.target.value);
@@ -13,7 +13,8 @@ function TodoSearch({ searchValue, setSearchValue }) {
       className="TodoSearch"
       placeholder="Cebolla"
       value={searchValue}// Aqui se conecta al estado
-      onChange={onSearchValueChange}    
+      onChange={onSearchValueChange}   
+      disabled={loading} //Deshabilita en input mientras esta cargando 
     />
   );
 }

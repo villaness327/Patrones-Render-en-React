@@ -16,6 +16,7 @@ function useLocalStorage(itemName, initialValue) {
         if (!localStorageItem) {
           localStorage.setItem(itemName, JSON.stringify(initialValue));
           parsedItem = initialValue;
+          
         } else {
           parsedItem = JSON.parse(localStorageItem);
         }
@@ -30,7 +31,7 @@ function useLocalStorage(itemName, initialValue) {
         setError(error); //Se setea el error en el estado.
       }
     }, 3000);
-  });
+  }); //Se ejecuta solo 1 vez
   
   const saveItem = (newItem) => {
     try {

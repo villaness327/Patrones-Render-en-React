@@ -14,7 +14,8 @@ function useTodos() { //Custom hook
   const [searchValue, setSearchValue] = React.useState('');
   const [openModal, setOpenModal] = React.useState(false);
 
-  const completedTodos = todos.filter(todo => !!todo.completed).length;
+  const completedTodos = todos.filter(todo => !!todo.completed).length; //Numero de todos completados
+
   const totalTodos = todos.length;
 
   let searchedTodos = [];
@@ -38,7 +39,7 @@ function useTodos() { //Custom hook
     saveTodos(newTodos);
   };
 
-  const completeTodo = (text) => {
+  const completeTodo = (text) => {  // Se cambia de false a true , es decir a completado
     const todoIndex = todos.findIndex(todo => todo.text === text);
     const newTodos = [...todos];
     newTodos[todoIndex].completed = true;

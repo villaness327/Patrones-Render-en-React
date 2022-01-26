@@ -40,16 +40,17 @@ function App() {//Componente Padre, donde se renderiza la Aplicacion
   return (
     <React.Fragment>
 
-      <Todoheader>
-          <TodoCounter>
+      <Todoheader loading={loading}>
+          <TodoCounter
               totalTodos={totalTodos}
               completedTodos={completedTodos}
-          </TodoCounter> 
-
+         
+          />
+          
           <TodoSearch
               searchValue={searchValue}
-              setSearchValue={setSearchValue}
-          />
+              setSearchValue={setSearchValue}        
+          /> 
       </Todoheader>   
 
      <TodoList
@@ -58,17 +59,17 @@ function App() {//Componente Padre, donde se renderiza la Aplicacion
        loading={loading}
        searchedTodos={searchedTodos}
        totalTodos={totalTodos}
-     
-
-  
+         
         onError={()=><TodosError />}
         onLoading={()=><TodosLoading />}
         onEmptyTodos={()=><EmptyTodos />}
         onEmptySearchResults={()=><EmptySearchResults searchValue={searchValue}/>}
 
 
-        /* Render Props */
-        render={todo => (
+       
+  
+      // //Render Props 
+       render={todo => (
             <TodoItem
               key={todo.text}
               text={todo.text}
@@ -76,16 +77,30 @@ function App() {//Componente Padre, donde se renderiza la Aplicacion
               onComplete={() => completeTodo(todo.text)}
               onDelete={() => deleteTodo(todo.text)}
             />
-          )}
+          )}  
 
+//::::::::::::::::::::::Hasta aqui se envia todo como props::::::::::::::::::::
+   >
+                 
+{ /*::::::::::::::::::::::::::::.Aqui se envia como children::::::::::::::::::::::::::: */
+          
+          // todo=>(
+          //     <TodoItem
+          //         key={todo.text}
+          //         text={todo.text}
+          //         completed={todo.completed}
+          //         onComplete={() => completeTodo(todo.text)}
+          //         onDelete={() => deleteTodo(todo.text)}
+          //   />
+          // )
+}
 
-        
-        />  
+     
+    </TodoList>  
 
       {!!openModal && (
         <Modal>
           <TodoForm
-
              addTodo={addTodo}
              setOpenModal={setOpenModal}
           
