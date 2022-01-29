@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-function useStorageListener(sincronize){ //Se recibe la funcion que sincroniza desde el componente App
+function useStorageListener(sincronize){ //Se recibe la funcion que sincroniza desde el componenente Changealert
 
     
         

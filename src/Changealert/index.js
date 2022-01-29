@@ -5,7 +5,7 @@ import './changealert.css';
 
 
 //Componente
-function Changealert({ sincronize }){ //Se recibe la funcion de sincronizado 
+function Changealert({ sincronize }){ //Se recibe la funcion de sincronizado desde el componente App
 
     const {show,toggleShow}=useStorageListener(sincronize);//Llamado al custom HOOK, y se envia la funcion
     //de sincronizado
