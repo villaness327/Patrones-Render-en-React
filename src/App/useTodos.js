@@ -7,6 +7,8 @@ function useTodos() { //Custom hook
   const {
     item: todos,
     saveItem: saveTodos,
+    sincronizeItem:sincronizeTodos,
+    setItem,
     loading,
     error,
   } = useLocalStorage('TODOS_V1', []);   //Custom HOOK
@@ -68,6 +70,7 @@ return{   //Se devuelven las propiedades como un objeto.
       deleteTodo,
       openModal,
       setOpenModal,
+      sincronizeTodos,
     }
 }
 

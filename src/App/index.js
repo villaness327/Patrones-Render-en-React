@@ -14,7 +14,7 @@ import { EmptySearchResults } from '../EmptySearchResults';
 import { TodoForm } from '../TodoForm';
 import { CreateTodoButton } from '../CreateTodoButton';
 import { Modal } from '../Modal';
-
+import { ChangeAlertWithStorageListener } from '../Changealert';
 //Importacion de componentes
 
 
@@ -33,6 +33,7 @@ function App() {//Componente Padre, donde se renderiza la Aplicacion
     searchValue, 
     setSearchValue,
     addTodo,
+    sincronizeTodos,
 
   } = useTodos(); //Llamada al custom hook "useTodos"
 
@@ -111,6 +112,14 @@ function App() {//Componente Padre, donde se renderiza la Aplicacion
       <CreateTodoButton
         setOpenModal={setOpenModal}
       />
+
+      <ChangeAlertWithStorageListener
+      
+      sincronizeTodos={sincronizeTodos}
+      
+   
+      />
+
     </React.Fragment>
   );
 }
