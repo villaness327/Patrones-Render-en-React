@@ -62,7 +62,7 @@ const sincronizeItem=()=>{
     saveItem,
     loading,
     error,
-    sincronizeItem
+    sincronizeItem,
   };
 }
 

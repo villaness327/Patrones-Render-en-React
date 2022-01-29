@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocalStorage } from './useLocalStorage';
+import { useLocalStorage } from './useLocalStorage'; //Se importa el custom hook
 
 
 
@@ -7,8 +7,7 @@ function useTodos() { //Custom hook
   const {
     item: todos,
     saveItem: saveTodos,
-    sincronizeItem:sincronizeTodos,
-    setItem,
+    sincronizeItem:sincronizeTodos,  
     loading,
     error,
   } = useLocalStorage('TODOS_V1', []);   //Custom HOOK

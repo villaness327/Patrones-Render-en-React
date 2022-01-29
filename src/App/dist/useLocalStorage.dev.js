@@ -33,6 +33,11 @@ function useLocalStorage(itemName, initialValue) {
       item = _React$useState6[0],
       setItem = _React$useState6[1];
 
+  var _React$useState7 = _react["default"].useState(true),
+      _React$useState8 = _slicedToArray(_React$useState7, 2),
+      sincronizedItem = _React$useState8[0],
+      setSincronizedItem = _React$useState8[1];
+
   _react["default"].useEffect(function () {
     setTimeout(function () {
       try {
@@ -47,12 +52,15 @@ function useLocalStorage(itemName, initialValue) {
         }
 
         setItem(parsedItem);
-        setLoading(false); //Loading false, por que ya se cargó
+        setLoading(false); //Loading false, para que termine de mostrar meensaje de carga
+
+        setSincronizedItem(true); //Todo queda sincronizado
       } catch (error) {
         setError(error); //Se setea el error en el estado.
       }
     }, 3000);
-  });
+  }, [sincronizedItem]); //se ejecuta cada vez que el estado de sincronizacion cambia
+
 
   var saveItem = function saveItem(newItem) {
     try {
@@ -64,10 +72,17 @@ function useLocalStorage(itemName, initialValue) {
     }
   };
 
+  var sincronizeItem = function sincronizeItem() {
+    setLoading(true); // estado de loadin
+
+    setSincronizedItem(false); //Cambia el estado por lo tanto el React.useEffect de carga de todos se ejecuta nuevamente
+  };
+
   return {
     item: item,
     saveItem: saveItem,
     loading: loading,
-    error: error
+    error: error,
+    sincronizeItem: sincronizeItem
   };
 }

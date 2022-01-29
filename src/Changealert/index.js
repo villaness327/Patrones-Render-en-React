@@ -1,28 +1,29 @@
 import React from 'react';
-import { withStorageListener } from './withStorageListener';// Se importa el HOC
+import { useStorageListener } from './useStorageListener';
 import './changealert.css';
 
 
 
 //Componente
-function Changealert({show,toggleShow}){
+function Changealert({ sincronize }){ //Se recibe la funcion de sincronizado 
+
+    const {show,toggleShow}=useStorageListener(sincronize);//Llamado al custom HOOK, y se envia la funcion
+    //de sincronizado
 
     if(show){  //Si show es verdadero, es porque hubo un cambio, entonces se muestra ek mensaje
+       
         return (
 
-            <div className='mensajeSincronizacionContainer'>
-                   <div className='mensajeSincronizacion'>
+            <div className="mensajeSincronizacionContainer">
+                   <div className="mensajeSincronizacion">
                         <p>Hubieron algunos cambios es necesario la Actualización de la Información</p>
-                            <button className='sincronizacionButton' onClick={()=>{
-                            
-                            toggleShow(); 
-                            
-                            }}>Cargar Información</button>
-
-                   </div>
-
-
-                
+                        <button 
+                        className="sincronizacionButton" 
+                        onClick={toggleShow}
+                        >                            
+                        Cargar Información
+                        </button>
+                   </div>               
                 
             </div>
 
@@ -32,15 +33,9 @@ function Changealert({show,toggleShow}){
             
         return null;
 
-    }
-
-       
+    }      
 
 }
 
-const ChangeAlertWithStorageListener=withStorageListener(Changealert);
-//Se crea una variable , y envuelve en el HOC componente Changealert
-
-
-export {ChangeAlertWithStorageListener};
-//Se exporta este vendria siendo el componente de verdad
+export {Changealert};
+//Se exporta eel componente
